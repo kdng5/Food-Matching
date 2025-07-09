@@ -35,7 +35,7 @@ function setupEnvironment()
 {
     //Kitchen
     gltfLoader.load(
-        '../Kitchen/Kitchen.glb',
+        `${import.meta.env.BASE_URL}Kitchen/Kitchen.glb`,
         (glb) => {
             table = glb.scene;
             scene.add(table);
@@ -46,7 +46,7 @@ function setupEnvironment()
 
     //Earth
     gltfLoader.load(
-        '../Earth/Earth.gltf',
+        `${import.meta.env.BASE_URL}Earth/Earth.gltf`,
         (gltf) =>
         {
             earth = gltf.scene;
@@ -60,7 +60,7 @@ function setupEnvironment()
 
 function setupFood()
 {
-    gltfLoader.setPath('../Foods/');
+    gltfLoader.setPath(`${import.meta.env.BASE_URL}Foods/`);
     const modelPaths = [
         'Broccoli/broccoli.gltf',
         'Pomegranate/pomegranate.gltf',

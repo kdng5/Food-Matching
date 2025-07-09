@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="utf-8">
+    <title>Food Matching!</title>
+  <script type="module" crossorigin src="/Food-Matching/assets/index-y016-1p9.js"></script>
+  <link rel="stylesheet" crossorigin href="/Food-Matching/assets/index-DQGnOGlT.css">
+</head>
+<body>
+<!--#region Modes Instruction -->
+<!-- From Uiverse.io by andrew-demchenk0 -->
+<div class="error">
+    <div class="error__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path></svg>
+    </div>
+    <div class="error__title">Press Space or click this buton to switch between Orbit and Merge Modes</div>
+    <div class="error__close"><svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20"><path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path></svg></div>
+</div>
+<!--#endregion -->
+
+<!--#region Modes Indicator -->
+<!-- From Uiverse.io by Navarog21 -->
+<div class="mode-indicator">
+    <button id="indicator">
+        <div id="mode-label">O R B I T</div>
+        <div id="clip">
+            <div id="leftTop" class="corner"></div>
+            <div id="rightBottom" class="corner"></div>
+            <div id="rightTop" class="corner"></div>
+            <div id="leftBottom" class="corner"></div>
+        </div>
+        <span id="rightArrow" class="arrow"></span>
+        <span id="leftArrow" class="arrow"></span>
+    </button>
+</div>
+<!--#endregion -->
+
+<div class="score-guide">
+    <h1>Scoring Guide:</h1>
+    <h2>Broccoli = 10 points</h2>
+    <h2>Pomegranate = 25 points</h2>
+    <h2>Melon = 55 points</h2>
+    <h2>Walnut = 125 points</h2>
+</div>
+
+<div class="information">
+    <h1>Score: 0</h1>
+    <h1>Time Left:</h1>
+</div>
+
+<div class="menu">
+    <div class="instructions">
+        <h1>Welcome to Food Matching!</h1>
+        <h2>Use the "Orbit Mode" to navigate around the table</h2>
+        <h2>Use the "Merge Mode" and drag matching foods to each other to form better food</h2>
+        <h2>Feed the food to the Earth to earn score</h2>
+        <h2>Earn as much score as possible before the time limit</h2>
+    </div>
+
+    <!--#region Time and Gamemode selections -->
+    <!-- From Uiverse.io by MikeeMikee -->
+    <div class ="radio-buttons">
+        <h1>How long will you be playing this game?</h1>
+
+        <div class="radio-options" id="time">
+            <label>
+                <input value="30" name="time-radio" type="radio" checked/>
+                <span>30 seconds</span>
+            </label>
+            <label>
+                <input value="60" name="time-radio" type="radio" />
+                <span>1 minute</span>
+            </label>
+            <label>
+                <input value="180" name="time-radio" type="radio" />
+                <span>3 minutes</span>
+            </label>
+            <span class="selection"></span>
+        </div>
+    </div>
+
+    <div class ="radio-buttons">
+        <h1>Select a Game Mode</h1>
+
+        <div class="radio-options" id="gamemodes">
+            <label>
+                <input value="normal" name="gamemode-radio" type="radio" checked/>
+                <span>Normal</span>
+            </label>
+            <label>
+                <input value="sandbox" name="gamemode-radio" type="radio"/>
+                <span>Sandbox</span>
+            </label>
+            <label>
+                <input value="food-crisis" name="gamemode-radio" type="radio" />
+                <span>Food Crisis</span>
+            </label>
+            <span class="selection"></span>
+        </div>
+    </div>
+    <!--#endregion -->
+
+    <div class="loading-section">
+        <h1>Loading</h1>
+        <progress id="loading-bar" value="0" max="100"></progress>
+    </div>
+
+    <!-- From Uiverse.io by ryota1231 -->
+    <button class="play-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+            <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+        </svg>
+        <span class="text">P L A Y</span>
+        <span class="circle"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+            <path
+                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+        </svg>
+    </button>
+
+</div>
+
+<!-- From Uiverse.io by vaibhavchandranv -->
+<div class="gameover-card">
+    <div class="head">GAME OVER!</div>
+    <div class="content">
+        <p id="game-result">You were able to earn:</p>
+        <button class="restart-button">Restart</button>
+    </div>
+</div>
+
+</body>
+</html>
